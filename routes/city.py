@@ -14,7 +14,9 @@ async def create_city(
 ):
     result = await crud.create_city(db=db, city_request=city_request)
     if result is None:
-        return {"error": "City with this name already exists."}
+        raise HTTPException(
+            status_code=404, detail="City with this name already exists."
+        )
     return result
 
 

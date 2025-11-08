@@ -30,7 +30,7 @@ async def get_cities(db: Depends(get_db)) -> list[CityResponse]:
 
 async def get_city(id: int, db: Depends(get_db)) -> list[CityResponse]:
     cities = await db.execute(select(City).where(City.id == id))
-    return cities.scalars().one()
+    return cities.scalars().first()
 
 
 async def update_city(db: AsyncSession, city_id: int, city_request: CreateCityRequest):
